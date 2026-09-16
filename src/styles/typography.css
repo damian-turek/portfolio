@@ -1,0 +1,43 @@
+@utility hero-text {
+    @apply text-[72px] leading-[0.9] font-black tracking-[0.01em] uppercase font-anton md:text-[148px];
+}
+
+@utility title-font {
+    @apply text-[48px] leading-[0.9] font-black uppercase font-anton md:text-[88px];
+}
+@utility section-header-font {
+    @apply text-[28px] leading-none uppercase font-anton font-bold md:text-[56px];
+}
+
+@utility tiles-title-font {
+    @apply text-[18px] leading-none uppercase font-anton md:text-[22px];
+}
+
+@utility body-font {
+    @apply text-[15px] font-normal leading-[1.65] font-dm-sans md:text-[16px] md:leading-[1.75];
+}
+
+@utility body-large {
+    @apply text-[16px] font-medium leading-normal font-dm-sans;
+}
+
+@utility body-medium {
+    @apply text-[13px] font-normal leading-[1.6] font-dm-sans md:text-[14px];
+}
+
+@utility body-small {
+    @apply text-[12px] font-normal font-dm-sans leading-relaxed;
+}
+
+@utility button-font {
+    @apply text-[10px] font-normal leading-4 uppercase tracking-widest font-space-mono md:text-[11px];
+}
+
+@utility label-font {
+    @apply text-[9px] font-normal leading-4 uppercase font-space-mono;
+}
+
+@utility label-font-spaced {
+    @apply text-[9px] font-normal leading-4 uppercase tracking-[0.14em] font-space-mono md:text-[10px] md:tracking-[0.16em];
+}
+    
