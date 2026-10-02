@@ -5,6 +5,7 @@ import { AppProvider } from '@/providers'
 import { Footer } from '@/components/molecules/Footer'
 import { getLayoutData } from '@/parsers/getLayoutData'
 import { Header } from '@/components/molecules/Header'
+import { CustomCursor } from '@/components/CustomCursor'
 
 const dmSans = DM_Sans({
   weight: ['300', '400', '500', '600', '700'],
@@ -38,6 +39,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
     >
       <body className="min-h-full flex flex-col">
         <AppProvider>
+          <CustomCursor />
           <Header {...HEADER_DATA} />
           {children}
           <Footer {...FOOTER_DATA} />

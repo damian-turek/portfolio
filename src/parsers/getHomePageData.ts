@@ -4,6 +4,7 @@ import { ContactProps } from '@/components/organisms/Contact'
 import { HeroProps } from '@/components/organisms/Hero'
 
 import HeroImage from '@/assets/hero.jpeg'
+import OrionImage from '@/assets/orion.webp'
 
 export const getHomePageData = () => {
   const HERO_DATA = {
@@ -163,6 +164,7 @@ export const getHomePageData = () => {
         description: 'SaaS · Revenue dashboard for e-commerce',
         projectUrl: '#',
         index: '(a.)',
+        projectImage: { src: OrionImage.src, alt: 'Orion Analytics preview' },
       },
       {
         title: 'Orion Analytics',
@@ -170,6 +172,7 @@ export const getHomePageData = () => {
         description: 'SaaS · Revenue dashboard for e-commerce',
         projectUrl: '#',
         index: '(b.)',
+        projectImage: { src: OrionImage.src, alt: 'Orion Analytics preview' },
       },
       {
         title: 'Orion Analytics',
@@ -177,6 +180,7 @@ export const getHomePageData = () => {
         description: 'SaaS · Revenue dashboard for e-commerce',
         projectUrl: '#',
         index: '(c.)',
+        projectImage: { src: OrionImage.src, alt: 'Orion Analytics preview' },
       },
       {
         title: 'Orion Analytics',
@@ -184,6 +188,7 @@ export const getHomePageData = () => {
         description: 'SaaS · Revenue dashboard for e-commerce',
         projectUrl: '#',
         index: '(d.)',
+        projectImage: { src: OrionImage.src, alt: 'Orion Analytics preview' },
       },
       {
         title: 'Orion Analytics',
@@ -191,6 +196,7 @@ export const getHomePageData = () => {
         description: 'SaaS · Revenue dashboard for e-commerce',
         projectUrl: '#',
         index: '(e.)',
+        projectImage: { src: OrionImage.src, alt: 'Orion Analytics preview' },
       },
     ],
   }

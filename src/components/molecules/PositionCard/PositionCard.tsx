@@ -9,6 +9,7 @@ export const PositionCard = ({
   isFirstRow: boolean
 }) => (
   <div
+    data-position
     className={cn(
       'flex py-7 gap-10 pr-10 border-b border-muted/20',
       isFirstRow && 'border-t border-muted/20'
