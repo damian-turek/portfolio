@@ -1,0 +1,31 @@
+{
+  "Homepage": {
+    "hero": {
+      "months": ["Sty", "", "", "Kwi", "", "", "Lip", "", "", "Paź", "", "Gru"]
+    },
+    "form": {
+      "name": "Imię",
+      "email": "Email",
+      "message": "Wiadomość",
+      "subject": "Temat",
+      "budget": "Budżet",
+      "submit": "Wyślij",
+      "errorMissingFields": "Proszę wypełnić wszystkie pola.",
+      "errorSendingEmail": "Wystąpił błąd podczas wysyłania wiadomości. Proszę spróbować ponownie później.",
+      "thankYouTitle": "Podziękowania za wiadomość",
+      "thankYouMessage": "Dziękuję {name} za wiadomość! Odpowiem najszybciej jak to możliwe.",
+      "successMessage": "Twoja wiadomość została wysłana pomyślnie. Odpowiem najszybciej jak to możliwe."
+    }
+  },
+  "Layout": {
+    "nav": {
+      "about": "O mnie",
+      "stack": "Technologie",
+      "projects": "Projekty",
+      "contact": "Kontakt"
+    },
+    "footer": {
+      "directEmail": "Bezpośredni email"
+    }
+  }
+}

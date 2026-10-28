@@ -4,6 +4,8 @@ import Link from 'next/link'
 import { useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { cn } from '@/lib/utils'
+import { LangSwitch } from '@/components/atoms/LangSwitch/LangSwitch'
+import { ThemeToggle } from '@/components/atoms/ThemeToggle'
 
 export type NavItem = {
   label: string
@@ -38,6 +40,8 @@ export const Header = ({ logo = 'DT', nav = [] }: HeaderProps) => {
               {item.label}
             </Link>
           ))}
+          <LangSwitch />
+          <ThemeToggle />
         </nav>
 
         <button
@@ -73,6 +77,10 @@ export const Header = ({ logo = 'DT', nav = [] }: HeaderProps) => {
             </Link>
           ))}
         </nav>
+        <div className="flex items-center justify-center gap-4 pb-4">
+          <LangSwitch />
+          <ThemeToggle />
+        </div>
       </div>
     </header>
   )

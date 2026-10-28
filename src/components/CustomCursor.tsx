@@ -12,52 +12,52 @@ const POINTER_SELECTOR =
 type Mode = 'default' | 'pointer' | 'text'
 
 export const CustomCursor = () => {
-  const ringWrapRef = useRef<HTMLDivElement>(null)
+  const frameWrapRef = useRef<HTMLDivElement>(null)
   const dotWrapRef = useRef<HTMLDivElement>(null)
-  const ringRef = useRef<HTMLDivElement>(null)
+  const frameRef = useRef<HTMLDivElement>(null)
   const dotRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const canHover = window.matchMedia('(hover: hover) and (pointer: fine)')
     if (!canHover.matches) return
 
-    const ringWrap = ringWrapRef.current
+    const frameWrap = frameWrapRef.current
     const dotWrap = dotWrapRef.current
-    const ring = ringRef.current
+    const frame = frameRef.current
     const dot = dotRef.current
-    if (!ringWrap || !dotWrap || !ring || !dot) return
+    if (!frameWrap || !dotWrap || !frame || !dot) return
 
     const style = document.createElement('style')
     style.textContent = 'html, html * { cursor: none !important; }'
     document.head.appendChild(style)
 
-    gsap.set([ringWrap, dotWrap], { autoAlpha: 0 })
+    gsap.set([frameWrap, dotWrap], { autoAlpha: 0 })
 
-    const ringX = gsap.quickTo(ringWrap, 'x', {
-      duration: 0.35,
-      ease: 'power3.out',
+    const frameX = gsap.quickTo(frameWrap, 'x', {
+      duration: 0.5,
+      ease: 'expo.out',
     })
-    const ringY = gsap.quickTo(ringWrap, 'y', {
-      duration: 0.35,
-      ease: 'power3.out',
+    const frameY = gsap.quickTo(frameWrap, 'y', {
+      duration: 0.5,
+      ease: 'expo.out',
     })
 
     let visible = false
 
     const setMode = (mode: Mode) => {
-      ring.dataset.mode = mode
+      frame.dataset.mode = mode
       dot.dataset.mode = mode
     }
 
     const handleMove = (e: MouseEvent) => {
       if (!visible) {
         visible = true
-        gsap.set(ringWrap, { x: e.clientX, y: e.clientY })
-        gsap.to([ringWrap, dotWrap], { autoAlpha: 1, duration: 0.3 })
+        gsap.set(frameWrap, { x: e.clientX, y: e.clientY })
+        gsap.to([frameWrap, dotWrap], { autoAlpha: 1, duration: 0.3 })
       }
       gsap.set(dotWrap, { x: e.clientX, y: e.clientY })
-      ringX(e.clientX)
-      ringY(e.clientY)
+      frameX(e.clientX)
+      frameY(e.clientY)
     }
 
     const handleOver = (e: MouseEvent) => {
@@ -69,16 +69,18 @@ export const CustomCursor = () => {
     }
 
     const handleDown = () => {
-      ring.dataset.pressed = 'true'
+      frame.dataset.pressed = 'true'
+      dot.dataset.pressed = 'true'
     }
 
     const handleUp = () => {
-      ring.dataset.pressed = 'false'
+      frame.dataset.pressed = 'false'
+      dot.dataset.pressed = 'false'
     }
 
     const handleLeave = () => {
       visible = false
-      gsap.to([ringWrap, dotWrap], { autoAlpha: 0, duration: 0.2 })
+      gsap.to([frameWrap, dotWrap], { autoAlpha: 0, duration: 0.2 })
     }
 
     window.addEventListener('mousemove', handleMove)
@@ -97,22 +99,39 @@ export const CustomCursor = () => {
     }
   }, [])
 
+  const corner =
+    'absolute size-2 border-foreground transition-opacity duration-200'
+
   return (
     <>
       <div
-        ref={ringWrapRef}
+        ref={frameWrapRef}
         aria-hidden="true"
         className="pointer-events-none fixed left-0 top-0 z-9999 h-0 w-0"
       >
         <div
-          ref={ringRef}
+          ref={frameRef}
           data-mode="default"
           data-pressed="false"
-          className="absolute left-0 top-0 size-9 -translate-x-1/2 -translate-y-1/2 rounded-full border border-primary/70 transition-[width,height,scale,background-color,border-radius,border-color] duration-300 ease-out
-                     data-[mode=pointer]:scale-[1.7] data-[mode=pointer]:border-primary data-[mode=pointer]:bg-primary/15
-                     data-[mode=text]:h-7 data-[mode=text]:w-0.5 data-[mode=text]:rounded-xs data-[mode=text]:border-primary data-[mode=text]:bg-primary
-                     data-[pressed=true]:scale-90 data-[pressed=true]:data-[mode=pointer]:scale-[1.35]"
-        />
+          className="group absolute left-0 top-0 size-10 -translate-x-1/2 -translate-y-1/2 rotate-0 transition-[width,height,rotate,scale] duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]
+                     data-[mode=pointer]:size-7 data-[mode=pointer]:rotate-90
+                     data-[mode=text]:h-7 data-[mode=text]:w-0.5
+                     data-[pressed=true]:scale-75"
+        >
+          <span
+            className={`${corner} left-0 top-0 border-l-2 border-t-2 group-data-[mode=text]:opacity-0`}
+          />
+          <span
+            className={`${corner} right-0 top-0 border-r-2 border-t-2 group-data-[mode=text]:opacity-0`}
+          />
+          <span
+            className={`${corner} bottom-0 left-0 border-b-2 border-l-2 group-data-[mode=text]:opacity-0`}
+          />
+          <span
+            className={`${corner} bottom-0 right-0 border-b-2 border-r-2 group-data-[mode=text]:opacity-0`}
+          />
+          <span className="absolute inset-0 bg-foreground opacity-0 transition-opacity duration-200 group-data-[mode=text]:opacity-100" />
+        </div>
       </div>
 
       <div
@@ -123,8 +142,10 @@ export const CustomCursor = () => {
         <div
           ref={dotRef}
           data-mode="default"
-          className="absolute left-0 top-0 size-1.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary transition-[scale] duration-200
-                     data-[mode=pointer]:scale-0 data-[mode=text]:scale-0"
+          data-pressed="false"
+          className="absolute left-0 top-0 size-1.5 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-foreground transition-[scale] duration-200
+                     data-[mode=pointer]:scale-[2.2] data-[mode=text]:scale-0
+                     data-[pressed=true]:scale-50"
         />
       </div>
     </>

@@ -1,25 +1,31 @@
-import React from 'react'
+'use client'
+
+import React, { useRef } from 'react'
 import { cva } from 'class-variance-authority'
 import Link from 'next/link'
 import { LucideIcon } from 'lucide-react'
+import { gsap } from 'gsap'
+import { useGSAP } from '@gsap/react'
 import { cn } from '@/lib/utils'
 
+gsap.registerPlugin(useGSAP)
+
 export const buttonStyles = cva(
-  'inline-flex items-center justify-center gap-3 transition-all duration-100 focus:outline-none cursor-pointer disabled:cursor-not-allowed py-2.5 px-6 button-font',
+  'relative inline-flex items-center justify-center gap-2.5 focus:outline-none cursor-pointer disabled:cursor-not-allowed py-2.5 px-6 button-font select-none overflow-hidden',
   {
     variants: {
       variant: {
         primary:
-          'bg-black text-white border border-black hover:bg-muted hover:-translate-y-0.25',
+          'bg-foreground text-background border border-foreground hover:bg-muted',
         secondary:
-          'bg-transparent border border-muted box-border text-muted hover:border-black hover:text-black',
+          'bg-transparent border border-muted/40 text-muted hover:border-primary hover:text-primary',
       },
       fullWidth: {
         true: 'w-full',
         false: 'w-fit',
       },
       iconOnly: {
-        true: 'p-1.5 md:p-3! h-fit w-fit aspect-square',
+        true: 'p-2.5 md:p-3! h-fit w-fit aspect-square',
         false: '',
       },
       isRounded: {
@@ -62,6 +68,77 @@ export const Button = ({
   type = 'button',
   icon: Icon,
 }: ButtonProps) => {
+  const containerRef = useRef<HTMLDivElement>(null)
+  const buttonRef = useRef<HTMLElement | null>(null)
+  const iconRef = useRef<SVGSVGElement>(null)
+  const labelRef = useRef<HTMLSpanElement>(null)
+
+  const { contextSafe } = useGSAP({ scope: containerRef })
+
+  const handleMouseEnter = contextSafe(() => {
+    if (disabled || !buttonRef.current) return
+
+    gsap.to(buttonRef.current, {
+      scale: 1.03,
+      y: -2,
+      duration: 0.3,
+      ease: 'power2.out',
+      overwrite: 'auto',
+    })
+
+    if (labelRef.current) {
+      gsap.to(labelRef.current, {
+        y: -1,
+        duration: 0.25,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      })
+    }
+
+    if (iconRef.current) {
+      gsap.to(iconRef.current, {
+        x: 3,
+        y: -1,
+        scale: 1.1,
+        duration: 0.35,
+        ease: 'back.out(2)',
+        overwrite: 'auto',
+      })
+    }
+  })
+
+  const handleMouseLeave = contextSafe(() => {
+    if (disabled || !buttonRef.current) return
+
+    gsap.to(buttonRef.current, {
+      scale: 1,
+      y: 0,
+      duration: 0.35,
+      ease: 'power3.out',
+      overwrite: 'auto',
+    })
+
+    if (labelRef.current) {
+      gsap.to(labelRef.current, {
+        y: 0,
+        duration: 0.3,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      })
+    }
+
+    if (iconRef.current) {
+      gsap.to(iconRef.current, {
+        x: 0,
+        y: 0,
+        scale: 1,
+        duration: 0.3,
+        ease: 'power2.out',
+        overwrite: 'auto',
+      })
+    }
+  })
+
   const styles = buttonStyles({
     variant,
     fullWidth,
@@ -71,23 +148,53 @@ export const Button = ({
 
   const content = (
     <>
-      {!iconOnly && label && <span>{label}</span>}
-      {Icon && <Icon className="size-4" />}
+      {!iconOnly && label && (
+        <span
+          ref={labelRef}
+          className="inline-block transition-colors duration-200"
+        >
+          {label}
+        </span>
+      )}
+      {Icon && (
+        <Icon
+          ref={iconRef}
+          className="size-4 shrink-0 transition-colors duration-200"
+        />
+      )}
     </>
   )
 
-  return link ? (
-    <Link href={link} onClick={onClick} className={cn(styles, className)}>
-      {content}
-    </Link>
-  ) : (
-    <button
-      type={type}
-      disabled={disabled}
-      onClick={onClick}
-      className={cn(styles, className)}
-    >
-      {content}
-    </button>
+  return (
+    <div ref={containerRef} className="inline-block">
+      {link ? (
+        <Link
+          ref={(el) => {
+            buttonRef.current = el
+          }}
+          href={link}
+          onClick={onClick}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className={cn(styles, className)}
+        >
+          {content}
+        </Link>
+      ) : (
+        <button
+          ref={(el) => {
+            buttonRef.current = el
+          }}
+          type={type}
+          disabled={disabled}
+          onClick={onClick}
+          onMouseEnter={handleMouseEnter}
+          onMouseLeave={handleMouseLeave}
+          className={cn(styles, className)}
+        >
+          {content}
+        </button>
+      )}
+    </div>
   )
 }

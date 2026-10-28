@@ -1,14 +1,17 @@
 import { FooterProps } from '@/components/molecules/Footer'
 import { HeaderProps } from '@/components/molecules/Header'
+import { getTranslations } from 'next-intl/server'
 
-export const getLayoutData = () => {
+export const getLayoutData = async () => {
+  const t = await getTranslations('Layout')
+
   const HEADER_DATA = {
     logo: 'DT',
     nav: [
-      { label: 'About Me', href: '#aboutMe' },
-      { label: 'Stack', href: '#skills' },
-      { label: 'Projects', href: '#projects' },
-      { label: 'Contact', href: '#contact' },
+      { label: t('nav.about'), href: '#aboutMe' },
+      { label: t('nav.stack'), href: '#skills' },
+      { label: t('nav.projects'), href: '#projects' },
+      { label: t('nav.contact'), href: '#contact' },
     ],
   } satisfies HeaderProps
 

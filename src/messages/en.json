@@ -1,0 +1,31 @@
+{
+  "Homepage": {
+    "hero": {
+      "months": ["Jan", "", "", "Apr", "", "", "Jul", "", "", "Oct", "", "Dec"]
+    },
+    "form": {
+      "name": "Name",
+      "email": "Email",
+      "message": "Message",
+      "subject": "Subject",
+      "budget": "Budget ",
+      "submit": "Submit",
+      "errorMissingFields": "Please fill out all fields.",
+      "errorSendingEmail": "An error occurred while sending the email. Please try again later.",
+      "thankYouTitle": "Thank You for Your Message",
+      "thankYouMessage": "Thank you {name} for your message! I will get back to you as soon as possible.",
+      "successMessage": "Your message has been sent successfully. I will get back to you as soon as possible."
+    }
+  },
+  "Layout": {
+    "nav": {
+      "about": "About Me",
+      "stack": "Stack",
+      "projects": "Projects",
+      "contact": "Contact"
+    },
+    "footer": {
+      "directEmail": "Direct Email"
+    }
+  }
+},

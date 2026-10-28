@@ -7,6 +7,7 @@ import { Button } from '@/components/atoms/Button'
 import React, { useEffect, useRef, useState } from 'react'
 import { gsap } from 'gsap'
 import { useGSAP } from '@gsap/react'
+import { useTranslations } from 'next-intl'
 
 gsap.registerPlugin(useGSAP)
 
@@ -59,6 +60,8 @@ export const Hero = ({
   tiles,
   githubUsername = 'damian-turek',
 }: HeroProps) => {
+  const t = useTranslations('Homepage.hero')
+  const months = t.raw('months') as string[]
   const gh = useGithubContribs(githubUsername)
   const maxMonth = gh ? Math.max(...gh.monthly, 1) : 1
   const sectionRef = useRef<HTMLElement>(null)
@@ -229,20 +232,7 @@ export const Hero = ({
                 ))}
               </div>
               <div className="flex justify-between">
-                {[
-                  'Sty',
-                  '',
-                  '',
-                  'Kwi',
-                  '',
-                  '',
-                  'Lip',
-                  '',
-                  '',
-                  'Paź',
-                  '',
-                  'Gru',
-                ].map((m, i) => (
+                {months.map((m, i) => (
                   <p key={i} className="label-font text-muted/40 text-[7px]">
                     {m}
                   </p>
@@ -302,8 +292,7 @@ export const Hero = ({
                   src={image.src}
                   alt={image.alt}
                   fill
-                  objectFit="cover"
-                  className="grayscale transition-transform duration-700 group-hover:scale-[1.02]"
+                  className="object-cover grayscale transition-transform duration-700 group-hover:scale-[1.02]"
                   priority
                 />
               </div>
@@ -325,8 +314,7 @@ export const Hero = ({
                   'flex-1 flex flex-col gap-1 px-3 lg:px-5 pt-5 pb-4 group/tile',
                   'border-l border-muted/30',
                   'transition-transform duration-300 hover:-translate-y-1',
-                  index === 0 ? 'border-none pl-0 lg:pl-10' : '',
-                  index === tiles.length - 1 ? 'lg:pl-10' : ''
+                  index === 0 ? 'border-none pl-0 lg:pl-10' : ''
                 )}
               >
                 <h3
