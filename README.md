@@ -1,5 +1,5 @@
 ## Getting Started
-# Add ```bash .env``` file
+# Add ```.env``` file
 
 SMTP_HOST=
 SMTP_PORT=
