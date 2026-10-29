@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { Hero } from '@/components/organisms/Hero'
 import { getHomePageData } from '@/parsers/getHomePageData'
 
-const { HERO_DATA } = getHomePageData()
+const { HERO_DATA } = await getHomePageData()
 
 const meta: Meta<typeof Hero> = {
   tags: ['autodocs'],

@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/nextjs-vite'
 import { Contact } from '@/components/organisms/Contact'
 import { getHomePageData } from '@/parsers/getHomePageData'
 
-const { CONTACT_DATA } = getHomePageData()
+const { CONTACT_DATA } = await getHomePageData()
 
 const meta: Meta<typeof Contact> = {
   tags: ['autodocs'],
