@@ -18,6 +18,77 @@
       "successMessage": "Your message has been sent successfully. I will get back to you as soon as possible."
     }
   },
+  "HomepageData": {
+    "hero": {
+      "description": "I’m a software developer with a product mindset. I don’t just write code — I think about why the product exists, who uses it, and what makes it worth building well.",
+      "imageAlt": "Hero Image",
+      "tiles": {
+        "projects": {
+          "description": "Software, WebApps, Systems, and more",
+          "label": "Projects"
+        },
+        "github": {
+          "description": "Contributions",
+          "label": "GitHub"
+        },
+        "experience": {
+          "description": "As software engineer",
+          "label": "Years exp."
+        },
+        "education": {
+          "title": "B.<span>Eng.</span>",
+          "description": "Graduated from University as C.S. engineer",
+          "label": "Education"
+        }
+      }
+    },
+    "about": {
+      "title": "WHO I <span>ACTUALLY AM</span>",
+      "current": "current",
+      "paragraphs": {
+        "p1": "I'm a fullstack developer with a product mindset. I don't just write code — I think about <strong>why the product exists</strong>, who uses it, and what makes it worth building well.",
+        "p2": "I started as a frontend developer obsessed with interaction details, and gradually moved into backend, infrastructure, and systems design. Now I own the full stack — from database schema to the last pixel.",
+        "p3": "Outside of shipping products, I <strong>write about engineering culture</strong>, and mentor junior developers who are figuring out their path.",
+        "p4": "I work best in small, focused teams where quality is taken seriously and people care about what they're building. My preferred way of working is <strong>Scrum or Agile</strong> — short iterations, regular feedback, and close collaboration with the team and the product owner."
+      },
+      "positions": {
+        "indigital": {
+          "title": "Frontend Developer",
+          "description": "* implemented web applications from scratch for Indigital using Next.js, WP, Payload <br/>\n* implemented Storybook for isolated UI component development, testing, and interactive documentation."
+        },
+        "greenbox": {
+          "title": "Frontend Developer",
+          "description": "* implemented from scratch a new website for Green Box Europe using Next.js, Contentful <br/>\n* implemented translation using i18n"
+        },
+        "hypode": {
+          "title": "Junior Frontend Engineer",
+          "description": "* implemented from scratch a new website for one of the clients using Gatsby and Contentful <br/>\n* connected to Instagram for fetching latest photos<br/>\n* implemented Google Maps API"
+        }
+      }
+    },
+    "skills": {
+      "title": "Full stack, <span>top to bottom.</span>"
+    },
+    "projects": {
+      "title": "CREATED <span>PROJECTS</span>",
+      "stockAssistant": {
+        "title": "Stock assistant - in progress",
+        "description": "AI & Analytics · Automated stock analysis & predictive assistant built with PyTorch"
+      },
+      "prepCode": {
+        "description": "SaaS · E-learning platform for post-graduate students"
+      },
+      "communityCore": {
+        "description": "SaaS · Platform for community management"
+      },
+      "lor": {
+        "description": "Web application · Booksy connected SSG application for LO'r"
+      }
+    },
+    "contact": {
+      "title": "Let's <br/> build <span>something</span>"
+    }
+  },
   "Layout": {
     "nav": {
       "about": "About Me",

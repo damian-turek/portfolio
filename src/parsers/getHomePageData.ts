@@ -1,3 +1,5 @@
+import { getTranslations } from 'next-intl/server'
+
 import { AboutMeProps } from '@/components/organisms/AboutMe'
 import { SkillsProps } from '@/components/organisms/Skills'
 import { ContactProps } from '@/components/organisms/Contact'
@@ -28,84 +30,77 @@ const getAllContributions = async (year = new Date().getFullYear()) => {
   }
 }
 
-export const getHomePageData = async () => {
+export const getHomePageData = async (locale: string) => {
+  const t = await getTranslations({ locale, namespace: 'HomepageData' })
   const total = await getAllContributions()
 
   const HERO_DATA = {
     title: 'Damian <span>Turek</span>',
     mail: 'damianturek@icloud.com',
-    description:
-      'I’m a software developer with a product mindset. I don’t just write code — I think about why the product exists, who uses it, and what makes it worth building well.',
+    description: t.raw('hero.description'),
     image: {
       src: HeroImage.src,
-      alt: 'Hero Image',
+      alt: t.raw('hero.imageAlt'),
     },
     tiles: [
       {
         title: '4',
-        description: 'Software, WebApps, Systems, and more',
-        label: 'Projects',
+        description: t.raw('hero.tiles.projects.description'),
+        label: t.raw('hero.tiles.projects.label'),
       },
       {
         title: `${(total / 1000).toFixed(1).replace('.0', '')}<span>k</span>`,
-        description: 'Contributions this year',
-        label: 'GitHub 2026',
+        description: t.raw('hero.tiles.github.description'),
+        label: t.raw('hero.tiles.github.label'),
       },
       {
         title: `${new Date().getFullYear() - 2023}<span>+</span>`,
-        description: 'As software engineer',
-        label: 'Years exp.',
+        description: t.raw('hero.tiles.experience.description'),
+        label: t.raw('hero.tiles.experience.label'),
       },
       {
-        title: 'B.<span>Eng.</span>',
-        description: 'Graduated from University as C.S. engineer',
-        label: 'Education',
+        title: t.raw('hero.tiles.education.title'),
+        description: t.raw('hero.tiles.education.description'),
+        label: t.raw('hero.tiles.education.label'),
       },
     ],
   } satisfies HeroProps
 
   const ABOUT_ME_DATA = {
-    title: 'WHO I <span>ACTUALLY AM</span>',
+    title: t.raw('about.title'),
     description: [
-      "I'm a fullstack developer with a product mindset. I don't just write code — I think about <strong>why the product exists</strong>, who uses it, and what makes it worth building well.",
-      'I started as a frontend developer obsessed with interaction details, and gradually moved into backend, infrastructure, and systems design. Now I own the full stack — from database schema to the last pixel.',
-      'Outside of shipping products, I <strong>Outside of shipping products, I</strong>, write about engineering culture, and mentor junior developers who are figuring out their path.',
-      "I work best in small, focused teams where quality is taken seriously and people care about what they're building.",
+      t.raw('about.paragraphs.p1'),
+      t.raw('about.paragraphs.p2'),
+      t.raw('about.paragraphs.p3'),
+      t.raw('about.paragraphs.p4'),
     ],
     positions: [
       {
         startDate: '2025.09',
-        endDate: 'current',
-        title: 'Frontend Developer',
+        endDate: t.raw('about.current'),
+        title: t.raw('about.positions.indigital.title'),
         company: 'INDIGITAL',
-        description:
-          '* implemented web applications from scratch for Indigital using Next.js, WP, Payload <br/>\n' +
-          '* implemented Storybook for isolated UI component development, testing, and interactive documentation.',
+        description: t.raw('about.positions.indigital.description'),
       },
       {
         startDate: '2023.10',
         endDate: '2024.01',
-        title: 'Frontend Developer',
+        title: t.raw('about.positions.greenbox.title'),
         company: 'Green Box Europe Sp. z o.o.',
-        description:
-          '* implemented from scratch a new website for Green Box Europe using Next.js, Contetful <br/>\n' +
-          '* implemented translation using i18n',
+        description: t.raw('about.positions.greenbox.description'),
       },
       {
         startDate: '2019.09',
         endDate: '2023.05',
-        title: 'Junior Frontend Engineer',
+        title: t.raw('about.positions.hypode.title'),
         company: 'Hypode',
-        description:
-          '* implemented from scratch a new website for one of the clients using Gatsby and Contentful <br/>\n' +
-          '* connected to Instagram for fetching latest photos<br/>\n' +
-          '* implemented Google Maps API',
+        description: t.raw('about.positions.hypode.description'),
       },
     ],
   } satisfies AboutMeProps
 
   const SKILLS_DATA = {
-    title: 'Full stack, <span>top to bottom.</span>',
+    title: t.raw('skills.title'),
     mainTechnologies: [
       'React',
       'Next.js',
@@ -131,26 +126,24 @@ export const getHomePageData = async () => {
       'StoryBook',
       'R3F',
       'Vite',
-      'Webpack',
-      'Babel',
-      'ESLint',
       'Prettier',
       'Algorithms',
       'MatLab',
       'Simulink',
       'Contentful',
       'Pandas',
+      'Scrum',
+      'Agile',
     ],
   } satisfies SkillsProps
 
   const PROJECTS_DATA = {
-    title: 'CREATED <span>PROJECTS</span>',
+    title: t.raw('projects.title'),
     projects: [
       {
-        title: 'Stock assistant - in progress',
+        title: t.raw('projects.stockAssistant.title'),
         technologies: ['PyTorch', 'Python', 'Pandas', 'Scrappers'],
-        description:
-          'AI & Analytics · Automated stock analysis & predictive assistant built with PyTorch',
+        description: t.raw('projects.stockAssistant.description'),
         projectUrl: 'https://github.com/damian-turek/stock-assistant',
         index: '(a.)',
       },
@@ -163,7 +156,7 @@ export const getHomePageData = async () => {
           'Nest.js',
           'REST API',
         ],
-        description: 'SaaS · E-learning platform for post-graduate students',
+        description: t.raw('projects.prepCode.description'),
         projectUrl: 'https://github.com/damian-turek/BOYSIT',
         index: '(b.)',
         projectImage: {
@@ -174,7 +167,7 @@ export const getHomePageData = async () => {
       {
         title: 'Community core',
         technologies: ['Next.js', 'TypeScript', 'CSS', 'REST API'],
-        description: 'SaaS · Platform for community management',
+        description: t.raw('projects.communityCore.description'),
         projectUrl: 'https://github.com/damian-turek/praca-inzynierska',
         index: '(c.)',
         projectImage: {
@@ -191,8 +184,7 @@ export const getHomePageData = async () => {
           'GraphQL',
           'Contentful',
         ],
-        description:
-          "Web application · Booksy connected SSG application for LO'r",
+        description: t.raw('projects.lor.description'),
         projectUrl: 'https://lor.com.pl/',
         index: '(d.)',
         projectImage: { src: LorImage.src, alt: "LO'r" },
@@ -201,7 +193,7 @@ export const getHomePageData = async () => {
   }
 
   const CONTACT_DATA = {
-    title: "Let's <br/> build <span>something</span>",
+    title: t.raw('contact.title'),
   } satisfies ContactProps
 
   return { HERO_DATA, ABOUT_ME_DATA, SKILLS_DATA, PROJECTS_DATA, CONTACT_DATA }

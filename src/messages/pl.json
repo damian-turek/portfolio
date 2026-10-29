@@ -18,6 +18,77 @@
       "successMessage": "Twoja wiadomość została wysłana pomyślnie. Odpowiem najszybciej jak to możliwe."
     }
   },
+  "HomepageData": {
+    "hero": {
+      "description": "Jestem programistą z podejściem produktowym. Nie piszę tylko kodu — myślę o tym, dlaczego produkt istnieje, kto z niego korzysta i co sprawia, że warto go zrobić dobrze.",
+      "imageAlt": "Zdjęcie główne",
+      "tiles": {
+        "projects": {
+          "description": "Oprogramowanie, aplikacje webowe, systemy i więcej",
+          "label": "Projekty"
+        },
+        "github": {
+          "description": "Kontrybucje",
+          "label": "GitHub"
+        },
+        "experience": {
+          "description": "Jako inżynier oprogramowania",
+          "label": "Lata dośw."
+        },
+        "education": {
+          "title": "in<span>ż.</span>",
+          "description": "Absolwent uczelni na kierunku informatyka, tytuł inżyniera",
+          "label": "Wykształcenie"
+        }
+      }
+    },
+    "about": {
+      "title": "KIM <span>NAPRAWDĘ JESTEM</span>",
+      "current": "obecnie",
+      "paragraphs": {
+        "p1": "Jestem programistą fullstack z podejściem produktowym. Nie piszę tylko kodu — myślę o tym, <strong>dlaczego produkt istnieje</strong>, kto z niego korzysta i co sprawia, że warto go zrobić dobrze.",
+        "p2": "Zaczynałem jako programista frontendowy zafascynowany detalami interakcji, a stopniowo przeszedłem do backendu, infrastruktury i projektowania systemów. Teraz odpowiadam za cały stack — od schematu bazy danych po ostatni piksel.",
+        "p3": "Poza dowożeniem produktów <strong>piszę o kulturze inżynierskiej</strong> i mentoruję młodszych programistów, którzy szukają swojej drogi.",
+        "p4": "Najlepiej pracuję w małych, skupionych zespołach, w których jakość jest traktowana poważnie, a ludziom zależy na tym, co budują. Najbardziej odpowiada mi praca w <strong>Scrumie lub Agile</strong> — krótkie iteracje, regularny feedback i bliska współpraca z zespołem oraz product ownerem."
+      },
+      "positions": {
+        "indigital": {
+          "title": "Programista Frontend",
+          "description": "* wdrażałem od podstaw aplikacje webowe dla Indigital w Next.js, WP i Payload <br/>\n* wdrożyłem Storybook do izolowanego rozwijania komponentów UI, testowania i interaktywnej dokumentacji."
+        },
+        "greenbox": {
+          "title": "Programista Frontend",
+          "description": "* wdrożyłem od podstaw nową stronę internetową dla Green Box Europe w Next.js i Contentful <br/>\n* wdrożyłem tłumaczenia z użyciem i18n"
+        },
+        "hypode": {
+          "title": "Junior Frontend Developer",
+          "description": "* wdrożyłem od podstaw nową stronę internetową dla jednego z klientów w Gatsby i Contentful <br/>\n* połączyłem się z Instagramem w celu pobierania najnowszych zdjęć<br/>\n* wdrożyłem Google Maps API"
+        }
+      }
+    },
+    "skills": {
+      "title": "Full stack, <span>od góry do dołu.</span>"
+    },
+    "projects": {
+      "title": "STWORZONE <span>PROJEKTY</span>",
+      "stockAssistant": {
+        "title": "Stock assistant - w trakcie",
+        "description": "AI i analityka · Automatyczny asystent do analizy i predykcji giełdowych zbudowany w PyTorch"
+      },
+      "prepCode": {
+        "description": "SaaS · Platforma e-learningowa dla studentów studiów podyplomowych"
+      },
+      "communityCore": {
+        "description": "SaaS · Platforma do zarządzania społecznościami"
+      },
+      "lor": {
+        "description": "Aplikacja webowa · Aplikacja SSG zintegrowana z Booksy dla LO'r"
+      }
+    },
+    "contact": {
+      "title": "Zbudujmy <br/> <span>coś razem</span>"
+    }
+  },
   "Layout": {
     "nav": {
       "about": "O mnie",

@@ -5,9 +5,9 @@ import { Skills } from '@/components/organisms/Skills'
 import { Contact } from '@/components/organisms/Contact'
 import { Hero } from '@/components/organisms/Hero'
 
-export default async function Home() {
+export default async function Home({ params }: { params: { locale: string } }) {
   const { HERO_DATA, ABOUT_ME_DATA, SKILLS_DATA, PROJECTS_DATA, CONTACT_DATA } =
-    await getHomePageData()
+    await getHomePageData(params.locale)
 
   return (
     <main>
