@@ -4,32 +4,55 @@ import { ContactProps } from '@/components/organisms/Contact'
 import { HeroProps } from '@/components/organisms/Hero'
 
 import HeroImage from '@/assets/hero.jpeg'
-import OrionImage from '@/assets/orion.webp'
+import LorImage from '@/assets/lor.png'
+import PrepCodeImage from '@/assets/prepcode.png'
+import CommunityImage from '@/assets/community.png'
 
-export const getHomePageData = () => {
+const WEEK_IN_SECONDS = 60 * 60 * 24 * 7
+
+const getAllContributions = async (year = new Date().getFullYear()) => {
+  try {
+    const res = await fetch(
+      `https://github-contributions-api.jogruber.de/v4/damian-turek?y=${year}`,
+      { next: { revalidate: WEEK_IN_SECONDS } }
+    )
+
+    if (!res.ok) throw new Error(`GitHub contributions API: ${res.status}`)
+
+    const data: { total: Record<string, number> } = await res.json()
+
+    return data.total[String(year)] ?? 0
+  } catch (error) {
+    console.error('getAllContributions failed', error)
+    return 0
+  }
+}
+
+export const getHomePageData = async () => {
+  const total = await getAllContributions()
+
   const HERO_DATA = {
     title: 'Damian <span>Turek</span>',
-    label: 'software engineer',
     mail: 'damianturek@icloud.com',
     description:
-      'I’m a fullstack developer with a product mindset. I don’t just write code — I think about why the product exists, who uses it, and what makes it worth building well.',
+      'I’m a software developer with a product mindset. I don’t just write code — I think about why the product exists, who uses it, and what makes it worth building well.',
     image: {
       src: HeroImage.src,
       alt: 'Hero Image',
     },
     tiles: [
       {
-        title: '12<span>+</span>',
+        title: '4',
         description: 'Software, WebApps, Systems, and more',
         label: 'Projects',
       },
       {
-        title: '17<span>k</span>',
+        title: `${(total / 1000).toFixed(1).replace('.0', '')}<span>k</span>`,
         description: 'Contributions this year',
         label: 'GitHub 2026',
       },
       {
-        title: '4<span>+</span>',
+        title: `${new Date().getFullYear() - 2023}<span>+</span>`,
         description: 'As software engineer',
         label: 'Years exp.',
       },
@@ -51,76 +74,32 @@ export const getHomePageData = () => {
     ],
     positions: [
       {
-        startDate: '2022.01',
-        endDate: '2023.01',
-        title: 'Senior Software Engineer',
-        company: 'TechCorp',
+        startDate: '2025.09',
+        endDate: 'current',
+        title: 'Frontend Developer',
+        company: 'INDIGITAL',
         description:
-          'Led architecture overhaul of transaction monitoring system. Reduced API latency by 60%, mentored team of 4.',
+          '* implemented web applications from scratch for Indigital using Next.js, WP, Payload <br/>\n' +
+          '* implemented Storybook for isolated UI component development, testing, and interactive documentation.',
       },
       {
-        startDate: '2022.01',
-        endDate: '2023.01',
-        title: 'Senior Software Engineer',
-        company: 'TechCorp',
+        startDate: '2023.10',
+        endDate: '2024.01',
+        title: 'Frontend Developer',
+        company: 'Green Box Europe Sp. z o.o.',
         description:
-          'Led architecture overhaul of transaction monitoring system. Reduced API latency by 60%, mentored team of 4.',
+          '* implemented from scratch a new website for Green Box Europe using Next.js, Contetful <br/>\n' +
+          '* implemented translation using i18n',
       },
       {
-        startDate: '2022.01',
-        endDate: '2023.01',
-        title: 'Senior Software Engineer',
-        company: 'TechCorp',
+        startDate: '2019.09',
+        endDate: '2023.05',
+        title: 'Junior Frontend Engineer',
+        company: 'Hypode',
         description:
-          'Led architecture overhaul of transaction monitoring system. Reduced API latency by 60%, mentored team of 4.',
-      },
-      {
-        startDate: '2022.01',
-        endDate: '2023.01',
-        title: 'Senior Software Engineer',
-        company: 'TechCorp',
-        description:
-          'Led architecture overhaul of transaction monitoring system. Reduced API latency by 60%, mentored team of 4.',
-      },
-      {
-        startDate: '2022.01',
-        endDate: '2023.01',
-        title: 'Senior Software Engineer',
-        company: 'TechCorp',
-        description:
-          'Led architecture overhaul of transaction monitoring system. Reduced API latency by 60%, mentored team of 4.',
-      },
-      {
-        startDate: '2022.01',
-        endDate: '2023.01',
-        title: 'Junior Developer',
-        company: 'TechCorp',
-        description:
-          'Led architecture overhaul of transaction monitoring system. Reduced API latency by 60%, mentored team of 4.',
-      },
-      {
-        startDate: '2022.01',
-        endDate: '2023.01',
-        title: 'Senior Software Engineer',
-        company: 'TechCorp',
-        description:
-          'Led architecture overhaul of transaction monitoring system. Reduced API latency by 60%, mentored team of 4.',
-      },
-      {
-        startDate: '2022.01',
-        endDate: '2023.01',
-        title: 'Senior Software Engineer',
-        company: 'TechCorp',
-        description:
-          'Led architecture overhaul of transaction monitoring system. Reduced API latency by 60%, mentored team of 4.',
-      },
-      {
-        startDate: '2022.01',
-        endDate: '2023.01',
-        title: 'Senior Software Engineer',
-        company: 'TechCorp',
-        description:
-          'Led architecture overhaul of transaction monitoring system. Reduced API latency by 60%, mentored team of 4.',
+          '* implemented from scratch a new website for one of the clients using Gatsby and Contentful <br/>\n' +
+          '* connected to Instagram for fetching latest photos<br/>\n' +
+          '* implemented Google Maps API',
       },
     ],
   } satisfies AboutMeProps
@@ -130,28 +109,37 @@ export const getHomePageData = () => {
     mainTechnologies: [
       'React',
       'Next.js',
+      'Nest.js',
       'TypeScript',
       'Tailwind CSS',
       'Node.js',
+      'Python',
+      'GCP',
+      'REST API',
+      'AI',
     ],
     technologies: [
       'GraphQL',
       'Prisma',
+      'SASS',
       'PostgreSQL',
       'MongoDB',
       'Redis',
+      'Git',
       'Docker',
-      'AWS',
       'Vitest',
       'StoryBook',
-      'Jest',
-      'Cypress',
-      'Playwright',
+      'R3F',
       'Vite',
       'Webpack',
       'Babel',
       'ESLint',
       'Prettier',
+      'Algorithms',
+      'MatLab',
+      'Simulink',
+      'Contentful',
+      'Pandas',
     ],
   } satisfies SkillsProps
 
@@ -159,44 +147,55 @@ export const getHomePageData = () => {
     title: 'CREATED <span>PROJECTS</span>',
     projects: [
       {
-        title: 'Orion Analytics',
-        technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'GraphQL'],
-        description: 'SaaS · Revenue dashboard for e-commerce',
-        projectUrl: '#',
+        title: 'Stock assistant - in progress',
+        technologies: ['PyTorch', 'Python', 'Pandas', 'Scrappers'],
+        description:
+          'AI & Analytics · Automated stock analysis & predictive assistant built with PyTorch',
+        projectUrl: 'https://github.com/damian-turek/stock-assistant',
         index: '(a.)',
-        projectImage: { src: OrionImage.src, alt: 'Orion Analytics preview' },
       },
       {
-        title: 'Orion Analytics',
-        technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'GraphQL'],
-        description: 'SaaS · Revenue dashboard for e-commerce',
-        projectUrl: '#',
+        title: 'Prep code',
+        technologies: [
+          'Next.js',
+          'TypeScript',
+          'Tailwind CSS',
+          'Nest.js',
+          'REST API',
+        ],
+        description: 'SaaS · E-learning platform for post-graduate students',
+        projectUrl: 'https://github.com/damian-turek/BOYSIT',
         index: '(b.)',
-        projectImage: { src: OrionImage.src, alt: 'Orion Analytics preview' },
+        projectImage: {
+          src: PrepCodeImage.src,
+          alt: 'Prep Code',
+        },
       },
       {
-        title: 'Orion Analytics',
-        technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'GraphQL'],
-        description: 'SaaS · Revenue dashboard for e-commerce',
-        projectUrl: '#',
+        title: 'Community core',
+        technologies: ['Next.js', 'TypeScript', 'CSS', 'REST API'],
+        description: 'SaaS · Platform for community management',
+        projectUrl: 'https://github.com/damian-turek/praca-inzynierska',
         index: '(c.)',
-        projectImage: { src: OrionImage.src, alt: 'Orion Analytics preview' },
+        projectImage: {
+          src: CommunityImage.src,
+          alt: 'Community core',
+        },
       },
       {
-        title: 'Orion Analytics',
-        technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'GraphQL'],
-        description: 'SaaS · Revenue dashboard for e-commerce',
-        projectUrl: '#',
+        title: `LO'r`,
+        technologies: [
+          'Gatsby.js',
+          'TypeScript',
+          'SCSS',
+          'GraphQL',
+          'Contentful',
+        ],
+        description:
+          "Web application · Booksy connected SSG application for LO'r",
+        projectUrl: 'https://lor.com.pl/',
         index: '(d.)',
-        projectImage: { src: OrionImage.src, alt: 'Orion Analytics preview' },
-      },
-      {
-        title: 'Orion Analytics',
-        technologies: ['Next.js', 'TypeScript', 'Tailwind CSS', 'GraphQL'],
-        description: 'SaaS · Revenue dashboard for e-commerce',
-        projectUrl: '#',
-        index: '(e.)',
-        projectImage: { src: OrionImage.src, alt: 'Orion Analytics preview' },
+        projectImage: { src: LorImage.src, alt: "LO'r" },
       },
     ],
   }

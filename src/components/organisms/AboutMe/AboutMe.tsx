@@ -20,7 +20,7 @@ export type AboutMeProps = {
   }[]
 }
 
-const ROWS = 3
+const ROWS = 2
 
 export const AboutMe = ({ title, description, positions }: AboutMeProps) => {
   const sectionRef = useRef<HTMLElement>(null)
@@ -127,13 +127,10 @@ export const AboutMe = ({ title, description, positions }: AboutMeProps) => {
         </div>
       </div>
 
-      <div
-        ref={wrapperRef}
-        className="hidden md:block overflow-x-auto flex-1 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
+      <div ref={wrapperRef} className="hidden md:block overflow-x-auto flex-1">
         <div
           ref={trackRef}
-          className="grid grid-rows-3 grid-flow-col auto-cols-[minmax(320px,1fr)] w-max"
+          className="grid grid-rows-2 grid-flow-col auto-cols-[minmax(320px,1fr)] w-max"
         >
           {positions.map((position, index) => (
             <PositionCard
@@ -145,15 +142,12 @@ export const AboutMe = ({ title, description, positions }: AboutMeProps) => {
         </div>
       </div>
 
-      <div
-        ref={mobileRef}
-        className="md:hidden overflow-x-auto scroll-smooth [-webkit-overflow-scrolling:touch] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-      >
-        <div className="flex gap-6 w-max">
+      <div ref={mobileRef} className="md:hidden">
+        <div className="flex flex-col items-center w-max">
           {positions.map((position, index) => (
             <div
               key={position.title + index}
-              className="snap-start w-[80vw] shrink-0"
+              className="snap-start w-[93vw] shrink-0"
             >
               <PositionCard position={position} isFirstRow />
             </div>

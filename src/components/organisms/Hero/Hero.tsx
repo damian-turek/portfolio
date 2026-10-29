@@ -13,7 +13,6 @@ gsap.registerPlugin(useGSAP)
 
 export type HeroProps = {
   title: string
-  label: string
   description: string
   mail: string
   image: ImageProps
@@ -53,7 +52,6 @@ function useGithubContribs(username?: string) {
 
 export const Hero = ({
   title,
-  label,
   mail,
   description,
   image,
@@ -176,13 +174,6 @@ export const Hero = ({
       <div className="flex flex-col xl:flex-row flex-1 gap-8 lg:gap-0">
         <div className="flex flex-col gap-6 justify-center lg:border-r border-muted/30 lg:min-w-180 lg:pr-10 lg:py-0">
           <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-3">
-              <div data-hero-line className="h-px w-7 bg-primary" />
-              <p data-hero-label className="label-font-spaced text-primary">
-                {label}
-              </p>
-            </div>
-
             <h1
               data-hero-title
               className="hero-text [&_span]:text-primary [&_span]:block"
@@ -248,7 +239,7 @@ export const Hero = ({
                 className="block w-1.5 h-1.5 rounded-full bg-primary animate-[pulse_2.2s_ease_infinite]"
               />
               <div data-hero-cta>
-                <Button label="Send Message" link="#contact" />
+                <Button label={t('sendMessage')} link="#contact" />
               </div>
               <div data-hero-cta>
                 <Button

@@ -24,7 +24,9 @@ export const Header = ({ logo = 'DT', nav = [] }: HeaderProps) => {
     <header className="border-b border-muted/30 sticky top-0 z-50 bg-background/80 backdrop-blur-md">
       <div className="container py-0 flex items-center justify-between h-14 gap-6">
         <Link
-          href="/"
+          href="https://github.com/damian-turek"
+          target="_blank"
+          rel="noopener noreferrer"
           className="font-anton hover:text-primary transition-colors"
         >
           {logo}

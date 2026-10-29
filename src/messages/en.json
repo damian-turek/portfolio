@@ -1,7 +1,8 @@
 {
   "Homepage": {
     "hero": {
-      "months": ["Jan", "", "", "Apr", "", "", "Jul", "", "", "Oct", "", "Dec"]
+      "months": ["Jan", "", "", "Apr", "", "", "Jul", "", "", "Oct", "", "Dec"],
+      "sendMessage": "Send Message"
     },
     "form": {
       "name": "Name",
@@ -28,4 +29,4 @@
       "directEmail": "Direct Email"
     }
   }
-},
+}

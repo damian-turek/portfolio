@@ -4,7 +4,8 @@
     --color-foreground: #0e0e0d;
     --color-muted: #5a5955;
     --color-primary: #d63b2f;
-    --color-accent: #19e68c;
+    /*--color-accent: #19e68c;*/
+    --color-accent: #2E8B57;
 
     --color-success: #1ba769;
     --color-warning: #e17100;

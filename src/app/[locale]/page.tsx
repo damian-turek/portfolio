@@ -5,9 +5,9 @@ import { Skills } from '@/components/organisms/Skills'
 import { Contact } from '@/components/organisms/Contact'
 import { Hero } from '@/components/organisms/Hero'
 
-export default function Home() {
+export default async function Home() {
   const { HERO_DATA, ABOUT_ME_DATA, SKILLS_DATA, PROJECTS_DATA, CONTACT_DATA } =
-    getHomePageData()
+    await getHomePageData()
 
   return (
     <main>

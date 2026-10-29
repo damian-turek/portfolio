@@ -29,6 +29,10 @@
 
 @custom-variant dark (&:is(.dark *));
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   @apply bg-background overscroll-none overflow-x-hidden min-h-screen max-w-svw;
 }

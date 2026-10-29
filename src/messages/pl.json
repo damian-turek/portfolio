@@ -1,7 +1,8 @@
 {
   "Homepage": {
     "hero": {
-      "months": ["Sty", "", "", "Kwi", "", "", "Lip", "", "", "Paź", "", "Gru"]
+      "months": ["Sty", "", "", "Kwi", "", "", "Lip", "", "", "Paź", "", "Gru"],
+      "sendMessage": "Wyślij wiadomość"
     },
     "form": {
       "name": "Imię",
