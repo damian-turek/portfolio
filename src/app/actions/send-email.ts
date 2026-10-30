@@ -13,46 +13,95 @@ const transporter = nodemailer.createTransport({
   },
 })
 
-export async function sendEmail(formData: FormData) {
-  const t = await getTranslations('Homepage.form')
+const escapeHtml = (value: string) =>
+  value
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
 
-  const name = formData.get('name') as string
-  const email = formData.get('email') as string
-  const subject = formData.get('subject') as string
-  const budget = formData.get('budget') as string
-  const message = formData.get('message') as string
+const cleanHeader = (value: string) =>
+  value
+    .replace(/[\r\n]+/g, ' ')
+    .replace(/[<>"]/g, '')
+    .trim()
+
+const getField = (formData: FormData, key: string) =>
+  ((formData.get(key) as string) ?? '').trim()
+
+export type SendEmailResult = {
+  success: boolean
+  message?: string
+}
+
+export async function sendEmail(
+  formData: FormData,
+  locale: string
+): Promise<SendEmailResult> {
+  const t = await getTranslations({ locale, namespace: 'Homepage.form' })
+
+  if (getField(formData, 'website')) {
+    return { success: true, message: t('successMessage') }
+  }
+
+  const name = cleanHeader(getField(formData, 'name'))
+  const email = cleanHeader(getField(formData, 'email'))
+  const subject = cleanHeader(getField(formData, 'subject'))
+  const budget = getField(formData, 'budget')
+  const message = getField(formData, 'message')
 
   if (!email || !subject || !message) {
-    throw new Error(t('errorMissingFields'))
+    return { success: false, message: t('errorMissingFields') }
   }
+
+  const sender = process.env.SMTP_USER
 
   try {
     await transporter.sendMail({
-      from: `"${name || 'Form'}" <${process.env.SMTP_USER}>`,
+      from: `"Contact form" <${sender}>`,
       to: process.env.CONTACT_RECEIVER_EMAIL,
-      replyTo: email,
+      replyTo: name ? `"${name}" <${email}>` : email,
       subject: `[Contact] ${subject} from ${name || email}`,
       text: `Name: ${name}\nEmail: ${email}\nBudget: ${budget}\n\nMessage:\n${message}`,
       html: `
-        <h3>New message from the form</h3>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Budget:</strong> ${budget}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
+        <div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#111">
+          <h3>New message from the form</h3>
+          <p><strong>Name:</strong> ${escapeHtml(name)}</p>
+          <p><strong>Email:</strong> ${escapeHtml(email)}</p>
+          <p><strong>Budget:</strong> ${escapeHtml(budget)}</p>
+          <p><strong>Message:</strong></p>
+          <p>${escapeHtml(message).replace(/\n/g, '<br>')}</p>
+        </div>
       `,
     })
-
-    await transporter.sendMail({
-      from: `"Damian Turek" <${process.env.SMTP_USER}>`,
-      to: email,
-      subject: t('thankYouTitle'),
-      text: t('thankYouMessage', { name: name || email }),
-    })
-
-    return { success: true }
   } catch (e) {
     console.error('SMTP Error:', e)
-    throw new Error(t('errorSendingEmail'))
+    return { success: false, message: t('errorSendingEmail') }
   }
+
+  try {
+    const reply = t('thankYouMessage', { name: name || email })
+
+    await transporter.sendMail({
+      from: `"Damian Turek" <${sender}>`,
+      to: email,
+      subject: t('thankYouTitle'),
+      text: `${reply}\n\n— Damian Turek`,
+      html: `
+        <div style="font-family:Arial,sans-serif;font-size:15px;line-height:1.6;color:#111">
+          <p>${escapeHtml(reply)}</p>
+          <p>— Damian Turek</p>
+        </div>
+      `,
+      headers: {
+        'Auto-Submitted': 'auto-replied',
+        'X-Auto-Response-Suppress': 'All',
+      },
+    })
+  } catch (e) {
+    console.error('SMTP auto-reply error:', e)
+  }
+
+  return { success: true, message: t('successMessage') }
 }

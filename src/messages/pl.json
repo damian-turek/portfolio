@@ -15,7 +15,8 @@
       "errorSendingEmail": "Wystąpił błąd podczas wysyłania wiadomości. Proszę spróbować ponownie później.",
       "thankYouTitle": "Podziękowania za wiadomość",
       "thankYouMessage": "Dziękuję {name} za wiadomość! Odpowiem najszybciej jak to możliwe.",
-      "successMessage": "Twoja wiadomość została wysłana pomyślnie. Odpowiem najszybciej jak to możliwe."
+      "successMessage": "Twoja wiadomość została wysłana pomyślnie. Odpowiem najszybciej jak to możliwe.",
+      "sendAnother": "Wyślij kolejną wiadomość"
     }
   },
   "HomepageData": {
